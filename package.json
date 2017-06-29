@@ -1,0 +1,7 @@
+{
+  "name": "EC2_AutoStopStart",
+  "version": "0.0.1",
+  "dependencies": {
+    "aws-sdk": "^2.79.0"
+  }
+}
