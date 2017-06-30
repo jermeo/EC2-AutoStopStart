@@ -75,7 +75,7 @@ awsUtils.getRegions()
           // action start
           if (startList.length > 0) {
             region = awsUtils.getRegionFromDNS(startList[0]); // todo: find better solution
-            tabPromiseStartStop.push(awsUtils.startInstances(region, startList.map(function(instance) {
+            tabPromiseStartStop.push(awsUtils.startInstances(region, startList.map((instance) => {
               return instance.InstanceId;
             })));
           }
@@ -83,7 +83,7 @@ awsUtils.getRegions()
           // action stop
           if (stopList.length > 0) {
             region = awsUtils.getRegionFromDNS(stopList[0]);
-            tabPromiseStartStop.push(awsUtils.stopInstances(region, stopList.map(function(instance) {
+            tabPromiseStartStop.push(awsUtils.stopInstances(region, stopList.map((instance) => {
               return instance.InstanceId;
             })));
           }

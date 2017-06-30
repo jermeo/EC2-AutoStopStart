@@ -47,10 +47,6 @@ module.exports = {
         region: region
       });
 
-      const params = {
-        Filters: [{Name: `tag:auto:stop`}]
-      };
-
       ec2.describeInstances({}, (error, response) => {
             if (error) {
               reject(error);
