@@ -1,3 +1,5 @@
+"use strict";
+
 const awsUtils = require("./aws-utils");
 const utils = require("./utils");
 

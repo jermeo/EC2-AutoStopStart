@@ -1,7 +1,8 @@
+"use strict";
+
 const AWS = require("aws-sdk");
 
-AWS.config.region = 'eu-west-1';
-
+//noinspection JSUnusedGlobalSymbols
 module.exports = {
 
   // 0: pending, 16: running, 32: shutting-down, 48: terminated, 64: stopping, 80: stopped
@@ -21,6 +22,8 @@ module.exports = {
 
     return new Promise((resolve, reject) => {
 
+      AWS.config.update({region: 'eu-west-1'}); //need default region
+
       const ec2 = new AWS.EC2();
 
       ec2.describeRegions({}, (error, response) => {
@@ -39,15 +42,14 @@ module.exports = {
 
   },
 
-  getRegionsInstances: (tag, region) => {
+  getRegionsInstances: (filter, region) => {
 
     return new Promise((resolve, reject) => {
 
-      const ec2 = new AWS.EC2({
-        region: region
-      });
+      AWS.config.update({region: region});
+      const ec2 = new AWS.EC2();
 
-      ec2.describeInstances({}, (error, response) => {
+      ec2.describeInstances(filter, (error, response) => {
             if (error) {
               reject(error);
             }
@@ -88,9 +90,8 @@ module.exports = {
 
   stopInstances: (region, instanceIds) => {
 
-    const ec2 = new AWS.EC2({
-      region: region
-    });
+    AWS.config.update({region: region});
+    const ec2 = new AWS.EC2();
 
     return new Promise((resolve, reject) => {
       ec2.stopInstances({InstanceIds: instanceIds}, (error, response) => {
@@ -107,9 +108,8 @@ module.exports = {
 
   startInstances: (region, instanceIds) => {
 
-    const ec2 = new AWS.EC2({
-      region: region
-    });
+    AWS.config.update({region: region});
+    const ec2 = new AWS.EC2();
 
     return new Promise((resolve, reject) => {
       ec2.startInstances({InstanceIds: instanceIds}, (error, response) => {

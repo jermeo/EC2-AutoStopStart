@@ -1,3 +1,5 @@
+"use strict";
+
 const parser = require('cron-parser');
 
 module.exports = {

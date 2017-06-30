@@ -4,5 +4,9 @@
   "dependencies": {
     "aws-sdk": "^2.79.0",
     "cron-parser": "^2.4.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.1.1",
+    "eslint-plugin-node": "^5.1.0"
   }
 }
