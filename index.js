@@ -4,6 +4,7 @@ const autoStartTag = "auto:start";
 const autoStopTag = "auto:stop";
 const keyName = "Name";
 
+//for all regions
 awsUtils.getRegions()
     .then(function(regions) {
 
@@ -13,6 +14,7 @@ awsUtils.getRegions()
       }
 
       return Promise.all(tabPromise);
+
     })
     .then(function(regionInstances) {
 
@@ -20,6 +22,7 @@ awsUtils.getRegions()
       let stopList = [];
 
       for (const instances of regionInstances) {
+
         for (const instance of instances) {
 
           if(awsUtils.getTagValue(instance, autoStartTag)) {
@@ -30,16 +33,17 @@ awsUtils.getRegions()
           }
 
         }
+
       }
 
       console.log("Start :");
       for (const instance of startList) {
-        console.log(awsUtils.getTagValue(instance, keyName));
+        console.log(awsUtils.getRegionFromDNS(instance) + " - " + awsUtils.getTagValue(instance, keyName));
       }
 
       console.log("Stop :");
       for (const instance of stopList) {
-        console.log(awsUtils.getTagValue(instance, keyName));
+        console.log(awsUtils.getRegionFromDNS(instance) + " - " + awsUtils.getTagValue(instance, keyName));
       }
 
     })

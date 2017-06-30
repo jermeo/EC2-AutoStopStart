@@ -69,6 +69,12 @@ module.exports = {
 
   },
 
+  getRegionFromDNS: (instance) => {
+
+    return instance.PrivateDnsName.split(".")[1];
+
+  },
+
   stopInstances: (region, instanceIds) => {
 
     const ec2 = new AWS.EC2({
