@@ -1,6 +1,10 @@
 const AWS = require("aws-sdk");
 
-AWS.config.region = 'us-east-1';
+AWS.config.region = 'eu-west-1';
+
+const autoStartTag = "auto:start";
+const autoStopTag = "auto:stop";
+const keyName = "Name";
 
 const getRegions = () => {
 
@@ -33,7 +37,7 @@ const getRegionsInstances = (tag, region, status) => {
     });
 
     const params = {
-      Filters: [ { Name: `tag:auto:stop` } ]
+      Filters: [{Name: `tag:auto:stop`}]
     };
 
     ec2.describeInstances({}, (error, response) => {
@@ -42,9 +46,9 @@ const getRegionsInstances = (tag, region, status) => {
           }
           else {
 
-            let instances = [] ;
+            let instances = [];
             response.Reservations.forEach(reservation => reservation.Instances.forEach(instance => {
-                instances.push(instance);
+              instances.push(instance);
             }));
 
             resolve(instances);
@@ -57,6 +61,15 @@ const getRegionsInstances = (tag, region, status) => {
 
 };
 
+const getTagValue = (instance, tagName) => {
+
+  let key = instance.Tags.find(x => x.Key === tagName);
+  if (key) {
+    return key.Value;
+  }
+  return undefined;
+
+};
 
 getRegions()
     .then(function(regions) {
@@ -69,12 +82,31 @@ getRegions()
       return Promise.all(tabPromise);
     })
     .then(function(regionInstances) {
-      for(const instances of regionInstances) {
-        for(const instance of instances) {
 
-            console.log(instance.Tags.find(x => x.Key === 'Name').Value);
+      let startList = [];
+      let stopList = [];
+
+      for (const instances of regionInstances) {
+        for (const instance of instances) {
+
+          if(getTagValue(instance, autoStartTag)) {
+            startList.push(instance);
+          }
+          if(getTagValue(instance, autoStopTag)) {
+            stopList.push(instance);
+          }
 
         }
+      }
+
+      console.log("Start :");
+      for (const instance of startList) {
+        console.log(getTagValue(instance, keyName));
+      }
+
+      console.log("Stop :");
+      for (const instance of stopList) {
+        console.log(getTagValue(instance, keyName));
       }
 
     })
