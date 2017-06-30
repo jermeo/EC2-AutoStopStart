@@ -4,6 +4,19 @@ AWS.config.region = 'eu-west-1';
 
 module.exports = {
 
+  // 0: pending, 16: running, 32: shutting-down, 48: terminated, 64: stopping, 80: stopped
+  isRunning: (instance) => {
+
+    return instance.State.Code === 16 ;
+
+  },
+
+  isStopped: (instance) => {
+
+    return instance.State.Code === 80 ;
+
+  },
+
   getRegions: () => {
 
     return new Promise((resolve, reject) => {
@@ -26,7 +39,7 @@ module.exports = {
 
   },
 
-  getRegionsInstances: (tag, region, status) => {
+  getRegionsInstances: (tag, region) => {
 
     return new Promise((resolve, reject) => {
 
@@ -46,7 +59,9 @@ module.exports = {
 
               let instances = [];
               response.Reservations.forEach(reservation => reservation.Instances.forEach(instance => {
-                instances.push(instance);
+                if(instance.State.Code !== 48) { // dont keep the terminated
+                  instances.push(instance);
+                }
               }));
 
               resolve(instances);
@@ -108,6 +123,7 @@ module.exports = {
         else {
 
           resolve(response);
+
         }
       });
     });
