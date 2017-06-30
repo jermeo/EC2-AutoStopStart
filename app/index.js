@@ -1,6 +1,5 @@
 const awsUtils = require("./aws-utils");
 const utils = require("./utils");
-const moment = require("moment");
 
 const autoStartTag = "auto:startTest";
 const autoStopTag = "auto:stopTest";

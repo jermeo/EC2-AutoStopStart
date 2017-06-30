@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "dependencies": {
     "aws-sdk": "^2.79.0",
-    "cron-parser": "^2.4.0",
-    "moment": "^2.18.1"
+    "cron-parser": "^2.4.1"
   }
 }
