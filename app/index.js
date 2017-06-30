@@ -30,14 +30,14 @@ awsUtils.getRegions()
 
       let tabPromiseStartStop = [];
 
-      // loop over all region
+      // loop over regions
       for (const instances of regionInstances) {
 
         let startList = [];
         let stopList = [];
         let region;
 
-        // loop over all instances
+        // loop over instances
         for (const instance of instances) {
 
           // check cron tag, status and time to action
