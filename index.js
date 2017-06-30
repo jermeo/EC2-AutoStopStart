@@ -1,4 +1,5 @@
 const awsUtils = require("./aws-utils");
+const utils = require("./utils");
 
 const autoStartTag = "auto:start";
 const autoStopTag = "auto:stop";
@@ -36,17 +37,17 @@ awsUtils.getRegions()
 
       }
 
-      console.log("Start :");
+      utils.log("Start :");
       for (const instance of startList) {
-        console.log(awsUtils.getRegionFromDNS(instance) + " - " + awsUtils.getTagValue(instance, keyName));
+        utils.log(awsUtils.getRegionFromDNS(instance) + " - " + awsUtils.getTagValue(instance, keyName));
       }
 
-      console.log("Stop :");
+      utils.log("Stop :");
       for (const instance of stopList) {
-        console.log(awsUtils.getRegionFromDNS(instance) + " - " + awsUtils.getTagValue(instance, keyName));
+        utils.log(awsUtils.getRegionFromDNS(instance) + " - " + awsUtils.getTagValue(instance, keyName));
       }
 
     })
     .catch(function(err) {
-      console.log(err);
+      utils.log(err);
     });
