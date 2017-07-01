@@ -8,6 +8,11 @@
   "devDependencies": {
     "eslint": "^4.1.1",
     "eslint-plugin-node": "^5.1.0",
-    "mocha": "^3.4.2"
+    "gulp": "^3.9.1",
+    "gulp-install": "^1.1.0",
+    "gulp-zip": "^4.0.0",
+    "mocha": "^3.4.2",
+    "node-aws-lambda": "^0.1.8",
+    "run-sequence": "^2.0.0"
   }
 }
