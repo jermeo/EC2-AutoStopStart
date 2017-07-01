@@ -18,24 +18,18 @@ module.exports = {
 
     const interval = parser.parseExpression(cron, options);
 
-    const date1 = new Date(now.getTime());
-    date1.setSeconds(date1.getSeconds() + delaySeconds);
-    let date2;
+    const dateMargin = new Date(now.getTime());
+    dateMargin.setSeconds(dateMargin.getSeconds() + delaySeconds);
 
+    let dateExecution;
 
     if(delaySeconds>0) {
-      date2 = interval.next();
-      // console.log(now.toISOString());
-      // console.log(date2.toISOString());
-      // console.log(date1.toISOString());
-      return now.getTime() < date2.getTime() && date2.getTime() < date1.getTime();
+      dateExecution = interval.next();
+      return now.getTime() < dateExecution.getTime() && dateExecution.getTime() <= dateMargin.getTime();
     }
     else {
-      date2 = interval.prev();
-      console.log(now.toISOString());
-      console.log(date2.toISOString());
-      console.log(date1.toISOString());
-      return date1.getTime() < date2.getTime() && date2.getTime() < now.getTime();
+      dateExecution = interval.prev();
+      return dateMargin.getTime() <= dateExecution.getTime() && dateExecution.getTime() < now.getTime();
     }
 
   },
