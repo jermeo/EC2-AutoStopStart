@@ -2,22 +2,44 @@
 
 const AWS = require("aws-sdk");
 
+/****
+ * utils wrapper for AWS SDK
+ * @type {{isRunning: ((p1:*)), isStopped: ((p1:*)), getRegions: (()), getRegionsInstances: ((p1?:*, p2?:*)),
+ * getTagValue: ((p1:*, p2:*)), getRegionFromDNS: ((p1:*)), stopInstances: ((p1?:*, p2?:*)),
+ * startInstances: ((p1?:*, p2?:*))}}
+ */
 //noinspection JSUnusedGlobalSymbols
 module.exports = {
 
   // 0: pending, 16: running, 32: shutting-down, 48: terminated, 64: stopping, 80: stopped
+
+
+  /**
+   * test if instance is in running state
+   * @param instance
+   * @returns {boolean}
+   */
   isRunning: (instance) => {
 
     return instance.State.Code === 16 ;
 
   },
 
+  /****
+   * test if instance is in stopped state
+   * @param instance
+   * @returns {boolean}
+   */
   isStopped: (instance) => {
 
     return instance.State.Code === 80 ;
 
   },
 
+  /***
+   * get AWS regions available
+   * @returns {Promise}
+   */
   getRegions: () => {
 
     return new Promise((resolve, reject) => {
@@ -42,6 +64,12 @@ module.exports = {
 
   },
 
+  /**
+   * get instances by AWS region (except terminated)
+   * @param filter
+   * @param region
+   * @returns {Promise}
+   */
   getRegionsInstances: (filter, region) => {
 
     return new Promise((resolve, reject) => {
@@ -72,6 +100,12 @@ module.exports = {
 
   },
 
+  /***
+   * get value of an instance tag
+   * @param instance
+   * @param tagName
+   * @returns {undefined}
+   */
   getTagValue: (instance, tagName) => {
 
     let key = instance.Tags.find(x => x.Key === tagName);
@@ -82,12 +116,23 @@ module.exports = {
 
   },
 
+  /***
+   * extract the region from a private instance DNS
+   * @param instance
+   * @returns {*}
+   */
   getRegionFromDNS: (instance) => {
 
     return instance.PrivateDnsName.split(".")[1];
 
   },
 
+  /**
+   * stop the list of instances id for a given region
+   * @param region
+   * @param instanceIds
+   * @returns {Promise}
+   */
   stopInstances: (region, instanceIds) => {
 
     AWS.config.update({region: region});
@@ -106,6 +151,12 @@ module.exports = {
     });
   },
 
+  /**
+   * start the list of instances fro a given region
+   * @param region
+   * @param instanceIds
+   * @returns {Promise}
+   */
   startInstances: (region, instanceIds) => {
 
     AWS.config.update({region: region});

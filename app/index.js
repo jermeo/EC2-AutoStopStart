@@ -3,23 +3,30 @@
 const awsUtils = require("./aws-utils");
 const utils = require("./utils");
 
-const autoStartTag = "auto:startTest";
-const autoStopTag = "auto:stopTest";
-const keyName = "Name";
-
-const dryMode = false; // for testing, if true, only display some informations
+/****
+ * ----------- PARAMETERS -------------------------------------
+ */
+const autoStartTag = "auto:startTest"; // start tag name
+const autoStopTag = "auto:stopTest"; // stop tag name
+const dryMode = false; // for testing, if true, don't do action
+const margin = 30; // margin time in minutes
+/****
+ * ----------- PARAMETERS -------------------------------------
+ */
 
 const now = new Date();
+const keyName = "Name";
 
 utils.log("------- Start -------");
 
 //for all regions
 awsUtils.getRegions()
+
     .then((regions) => {
 
       let tabPromise = [];
 
-      //prepare promise array for each regions
+      // generate promise array for each regions
       for (const region of regions) {
         tabPromise.push(awsUtils.getRegionsInstances({}, region));
       }
@@ -47,25 +54,31 @@ awsUtils.getRegions()
 
           if (startCron || stopCron) {
 
-            if (startCron && awsUtils.isStopped(instance) && utils.isTimeToAction(startCron, now, 31 * 60)) {
+            if (startCron && awsUtils.isStopped(instance) && utils.isTimeToAction(startCron, now, margin * 60)) {
 
-              utils.log("Need START: " + awsUtils.getRegionFromDNS(instance) + " (" + instance.InstanceId + ") - " + awsUtils.getTagValue(instance, keyName) + " (" + startCron + ")");
+              utils.log(`START needed: ${awsUtils.getRegionFromDNS(instance)}\\${awsUtils.getTagValue(instance, keyName)} - ${instance.InstanceId} - (${stopCron})`);
+
               startList.push(instance);
 
             }
-            else if (stopCron && awsUtils.isRunning(instance) && utils.isTimeToAction(stopCron, now, -31 * 60)) {
+            else if (stopCron && awsUtils.isRunning(instance) && utils.isTimeToAction(stopCron, now, margin * 60)) {
 
-              utils.log("Need STOP: " + awsUtils.getRegionFromDNS(instance) + " (" + instance.InstanceId + ") - " + awsUtils.getTagValue(instance, keyName) + " (" + stopCron + ")");
+              utils.log(`STOP needed: ${awsUtils.getRegionFromDNS(instance)}\\${awsUtils.getTagValue(instance, keyName)} - ${instance.InstanceId} - (${stopCron})`);
+
               stopList.push(instance);
 
             }
             else {
-              utils.log("Nothing to do with: " + awsUtils.getRegionFromDNS(instance) + " - " + awsUtils.getTagValue(instance, keyName) + " (tag found but no action needed)");
+
+              utils.log(`Nothing to do with: ${awsUtils.getRegionFromDNS(instance)}\\${awsUtils.getTagValue(instance, keyName)} (tag found but no action needed)`);
+
             }
 
           }
           else {
-            utils.log("Nothing to do with: " + awsUtils.getRegionFromDNS(instance) + " - " + awsUtils.getTagValue(instance, keyName) + " (tag not found)");
+
+            utils.log(`Nothing to do with: ${awsUtils.getRegionFromDNS(instance)}\\${awsUtils.getTagValue(instance, keyName)} (tag not found)`);
+
           }
 
         }
@@ -75,7 +88,7 @@ awsUtils.getRegions()
 
           // action start
           if (startList.length > 0) {
-            region = awsUtils.getRegionFromDNS(startList[0]); // todo: find better solution
+            region = awsUtils.getRegionFromDNS(startList[0]);
             tabPromiseStartStop.push(awsUtils.startInstances(region, startList.map((instance) => {
               return instance.InstanceId;
             })));
@@ -90,11 +103,14 @@ awsUtils.getRegions()
           }
         }
 
+        // next region
       }
 
+      // execute array of promises actions
       return Promise.all(tabPromiseStartStop);
 
     })
+
     .then((tabResults) => {
 
       // display AWS results
@@ -114,10 +130,13 @@ awsUtils.getRegions()
       }
 
     })
+
     .catch((err) => {
-      utils.log("ERROR:");
+      utils.log("-------------- ERROR -----------------");
       utils.log(err);
+      utils.log("-------------- ERROR -----------------");
     })
+
     .then(() => {
       utils.log("------- End -------");
     });
