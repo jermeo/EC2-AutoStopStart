@@ -137,10 +137,12 @@ exports.handler = (event, context, callback) => {
         utils.log("-------------- ERROR -----------------");
         utils.log(err);
         utils.log("-------------- ERROR -----------------");
+        callback(err);
       })
 
       .then(() => {
         utils.log("------- End -------");
+        callback(null, "success");
       });
 
 };
