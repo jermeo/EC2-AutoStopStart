@@ -34,8 +34,7 @@ gulp.task('node-mods', function() {
 // so I use .Net Framework
 const cmd='powershell Add-Type -assembly "system.io.compression.filesystem";[System.IO.Compression.Zipfile]::CreateFromDirectory("dist", "dist.zip")';
 gulp.task('zip', function() {
-  return run(cmd).exec()
-      .pipe(gulp.dest('output'));
+  return run(cmd).exec();
 });
 
 gulp.task('upload', function(callback) {
