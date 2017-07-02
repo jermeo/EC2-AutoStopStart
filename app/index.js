@@ -6,9 +6,9 @@ const utils = require("./utils");
 /****
  * ----------- PARAMETERS -------------------------------------
  */
-const autoStartTag = "auto:startTest"; // start tag name
-const autoStopTag = "auto:stopTest"; // stop tag name
-const dryMode = false; // for testing, if true, don't do action
+const autoStartTag = "auto:start"; // start tag name
+const autoStopTag = "auto:stop"; // stop tag name
+const dryMode = false; // for testing, if true, never execute action
 const margin = 30; // margin time in minutes, depend on the lambda schedule
 /****
  * ----------- PARAMETERS -------------------------------------
@@ -24,7 +24,7 @@ exports.handler = (event, context, callback) => {
 
   utils.log(`Now: ${now.toISOString()}`);
 
-//for all regions
+  // for all regions
   awsUtils.getRegions()
 
       .then((regions) => {
