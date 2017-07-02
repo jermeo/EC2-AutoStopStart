@@ -35,8 +35,18 @@ module.exports = {
 
     let dateExecution;
 
+
+
     if (marginSeconds > 0) {
       dateExecution = interval.next();
+
+      // console.log("marginSeconds: " + marginSeconds);
+      // console.log("dateExecution: " + dateExecution.toISOString());
+      // console.log("now: " + now.toISOString());
+      // console.log("dateMargin: " + dateMargin.toISOString());
+      // console.log(now.getTime() < dateExecution.getTime());
+      // console.log(dateExecution.getTime() <= dateMargin.getTime());
+
       return now.getTime() < dateExecution.getTime() && dateExecution.getTime() <= dateMargin.getTime();
     }
     else {

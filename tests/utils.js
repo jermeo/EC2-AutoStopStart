@@ -73,6 +73,12 @@ describe('Utils', function() {
       assert.equal(utils.isTimeToAction(cron, now, -30 * 60), false);
     });
 
+    it('17h00 stop time should return true', function() {
+      const cron = "0 0 9 * * *";
+      const now = new Date(2017, 7, 2, 8, 35, 0);
+      assert.equal(utils.isTimeToAction(cron, now, 30 * 60), true);
+    });
+
   });
 
 
