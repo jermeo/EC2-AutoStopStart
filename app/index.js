@@ -14,12 +14,15 @@ const margin = 30; // margin time in minutes, depend on the lambda schedule
  * ----------- PARAMETERS -------------------------------------
  */
 
-const now = new Date();
 const keyName = "Name";
 
 exports.handler = (event, context, callback) => {
 
   utils.log("------- Start -------");
+
+  const now = new Date();
+
+  utils.log(`Now: ${now.toISOString()}`);
 
 //for all regions
   awsUtils.getRegions()
