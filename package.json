@@ -15,5 +15,17 @@
     "mocha": "^3.4.2",
     "node-aws-lambda": "^0.1.8",
     "run-sequence": "^2.0.0"
-  }
+  },
+  "author": "Jérôme Piquet",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "ec2",
+    "lambda",
+    "start",
+    "stop"
+  ]
 }
