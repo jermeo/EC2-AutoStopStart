@@ -1,11 +1,12 @@
 {
   "name": "EC2_AutoStopStart",
+  "description": "Auto start and stop your EC2 instances. Save your money !",
   "version": "0.0.1",
   "dependencies": {
-    "aws-sdk": "^2.79.0",
     "cron-parser": "^2.4.1"
   },
   "devDependencies": {
+    "aws-sdk": "^2.79.0",
     "eslint": "^4.1.1",
     "eslint-plugin-node": "^5.1.0",
     "gulp": "^3.9.1",
