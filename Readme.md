@@ -38,7 +38,7 @@ Never forget that AWS Lambda work in UTC Time.
    * insert a schedule expression: rate(5 minutes) or what you need...
    * click "Enable trigger" now or later if you need test
 
-![sxhedule](img/schedule.png "schedule")
+<img src="img/schedule.png" alt="schedule" style="width: 400px;"/>
 
 * click "Next"
 * Give a name and a description for the lambda
