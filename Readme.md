@@ -105,40 +105,40 @@ create a lambda with the AWS console (https://eu-west-1.console.aws.amazon.com/l
 
 1. Clone this repository
 
-2. Run npm install
+2. Run ```npm install```
 
 3. Add a file: **lambda-config.js**
 
-and fill the necessary informations
+    and fill the necessary informations
 
-```json
-module.exports = {
-    region: 'YOUR_REGION',
-    functionName: 'YOUR_LAMBDA_NAME'
-};
-```
-You can create the lambda "on the fly" with more parameters.
-If you need it, go to https://github.com/ThoughtWorksStudios/node-aws-lambda
-Thanks to ThoughtWorksStudios for this great module !
+    ```json
+    module.exports = {
+        region: 'YOUR_REGION',
+        functionName: 'YOUR_LAMBDA_NAME'
+    };
+    ```
+    You can create the lambda "on the fly" with more parameters.
+    If you need it, go to https://github.com/ThoughtWorksStudios/node-aws-lambda
+    Thanks to ThoughtWorksStudios for this great module !
 
 4. If you have an AWS profile with the necessary rights installed, you can deploy your lambda with the **deploy** gulp task.
 
-![image_1](img/image_1.png)
+    ![image_1](img/image_1.png)
 
-It's possible to fill the credentials directly [in the lambda-config.js file](https://github.com/ThoughtWorksStudios/node-aws-lambda) .
+    It's possible to fill the credentials directly [in the lambda-config.js file](https://github.com/ThoughtWorksStudios/node-aws-lambda) .
 
 5. Back to the AWS Lambda console
 
-Now, you can view the uploaded code (a refresh can be needed):
+    Now, you can view the uploaded code (a refresh can be needed):
 
-![lambda_config](img/lambda_config.png)
+    ![lambda_config](img/lambda_config.png)
 
-And you can test the Lambda:
+    And you can test the Lambda:
 
-![image_2](img/image_2.png)
+    ![image_2](img/image_2.png)
 
-If all is OK, after some seconds you can see this output:
+    If all is OK, after some seconds you can see this output:
 
-![image_3](img/image_3.png)
+    ![image_3](img/image_3.png)
 
-Click on **logs** to view details with CloudWatch
+    Click on **logs** to view details with CloudWatch
