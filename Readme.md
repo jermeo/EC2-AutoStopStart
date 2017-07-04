@@ -119,6 +119,7 @@ create a lambda with the AWS console (https://eu-west-1.console.aws.amazon.com/l
     ```
     You can create the lambda "on the fly" with more parameters.
     If you need it, go to https://github.com/ThoughtWorksStudios/node-aws-lambda
+
     Thanks to ThoughtWorksStudios for this great module !
 
 4. If you have an AWS profile with the necessary rights installed, you can deploy your lambda with the **deploy** gulp task.
