@@ -19,8 +19,8 @@ Inspired by existing python and nodejs applications. In particular this one : ht
   * Auto-stop instance every day at 7pm : `0 19 * * *`
   * Auto-start instance every day at 8:30am : `0 30 8 * * *`
 
-With a default margin of 15 minutes, EC2 instances will be stopped between 6:45 and 7pm and started between 8am and 8:15am.
-The margin time can be set with a variable.
+With a default margin of 15 minutes, EC2 instances will be stop between 7pm and 7:15pm and start between 8:15am and 8:30am.
+The margin time can be set with a variable in the source code. It must be linked to the lambda schedule settings.
 
 Values of tags are CRON expressions : http://www.cronmaker.com/. Seconds are optionals.
 
