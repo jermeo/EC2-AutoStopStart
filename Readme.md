@@ -41,8 +41,8 @@ create a lambda with the AWS console (https://eu-west-1.console.aws.amazon.com/l
 <img src="img/schedule.png" alt="schedule" style="width: 500px;"/>
 
 * Click "Next"
-* Configure function : give a name and a description for the lambda
-* Runtime: choose Node,js 6.10
+* Configure function: give a name and a description for the lambda
+* Runtime: choose Node.js 6.10
 * Lambda function code: let "Edit code inline"
 
 ![config](img/lambda_config_1.png "config")
