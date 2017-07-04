@@ -9,7 +9,7 @@ const utils = require("./utils");
 const autoStartTag = "auto:start"; // start tag name
 const autoStopTag = "auto:stop"; // stop tag name
 const dryMode = false; // for testing, if true, never execute action
-const margin = 30; // margin time in minutes, depend on the lambda schedule
+const margin = 15; // margin time in minutes, depend on the lambda schedule
 /****
  * ----------- PARAMETERS -------------------------------------
  */

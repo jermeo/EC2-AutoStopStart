@@ -19,9 +19,12 @@ Inspired by existing python and nodejs applications. In particular this one : ht
   * Auto-stop instance every day at 7pm : `0 19 * * *`
   * Auto-start instance every day at 8:30am : `0 30 8 * * *`
 
+With a default margin of 15 minutes, EC2 instances will be stopped between 6:45 and 7pm and started between 8am and 8:15am.
+The margin time can be set with a variable.
+
 Values of tags are CRON expressions : http://www.cronmaker.com/. Seconds are optionals.
 
-Never forget that AWS Lambda work in UTC Time.
+**Never forget that AWS Lambda works with UTC Time.**
     
 ## AWS Lambda Configuration
 
@@ -124,7 +127,13 @@ Thanks to ThoughtWorksStudios for this great module !
 
 It's possible to fill the credentials directly [in the lambda-config.js file](https://github.com/ThoughtWorksStudios/node-aws-lambda) .
 
-5. You can test the Lambda.
+5. Back to the AWS Lambda console
+
+Now, you can view the uploaded code (a refresh can be needed):
+
+![lambda_config](img/lambda_config.png)
+
+And you can test the Lambda:
 
 ![image_2](img/image_2.png)
 
