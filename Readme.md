@@ -111,7 +111,7 @@ create a lambda with the AWS console (https://eu-west-1.console.aws.amazon.com/l
 
     and fill the necessary informations
 
-    ```json
+    ```js
     module.exports = {
         region: 'YOUR_REGION',
         functionName: 'YOUR_LAMBDA_NAME'
