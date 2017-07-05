@@ -24,7 +24,7 @@ The margin time can be set with a variable in the source code. It must be linked
 
 Values of tags are CRON expressions : http://www.cronmaker.com/. Seconds are optionals.
 
-**Never forget that AWS Lambda works with UTC Time.**
+:exclamation: **Never forget that AWS Lambda works with UTC Time** :exclamation:
     
 ## AWS Lambda Configuration
 
@@ -143,3 +143,6 @@ create a lambda with the AWS console (https://eu-west-1.console.aws.amazon.com/l
     ![image_3](img/image_3.png)
 
     Click on **logs** to view details with CloudWatch
+
+
+That's all :relaxed:
