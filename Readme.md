@@ -38,7 +38,7 @@ create a lambda with the AWS console (https://eu-west-1.console.aws.amazon.com/l
    * insert a schedule expression: rate(5 minutes) or what you need...
    * click "Enable trigger" now or later if you need test
 
-<img src="img/schedule.png" alt="schedule" style="width: 500px;"/>
+![schedule_1](img/schedule_1.png)
 
 * Click "Next"
 * Configure function: give a name and a description for the lambda
