@@ -57,26 +57,26 @@ create a lambda with the AWS console (https://eu-west-1.console.aws.amazon.com/l
     * Click on the **Edit** button, confirm, and paste this policy:
 
     ```json
-   {
-       "Version": "2012-10-17",
-       "Statement": [
-           {
-               "Action": [
-                   "ec2:DescribeRegions",
-                   "ec2:DescribeInstances",
-                   "ec2:StartInstances",
-                   "ec2:StopInstances",
-                   "ec2:CreateNetworkInterface",
-                   "ec2:DeleteNetworkInterface",
-                   "ec2:DescribeNetworkInterfaces",
-                   "logs:CreateLogGroup",
-                   "logs:CreateLogStream",
-                   "logs:PutLogEvents"
-               ],
-               "Effect": "Allow",
-               "Resource": "*"
-           }
-       ]
+    {
+     "Version": "2012-10-17",
+     "Statement": [
+       {
+         "Effect": "Allow",
+          "Action": [
+                      "ec2:DescribeRegions",
+                      "ec2:DescribeInstances",
+                      "ec2:StartInstances",
+                      "ec2:StopInstances",
+                      "ec2:CreateNetworkInterface",
+                      "ec2:DeleteNetworkInterface",
+                      "ec2:DescribeNetworkInterfaces",
+                      "logs:CreateLogGroup",
+                      "logs:CreateLogStream",
+                      "logs:PutLogEvents"
+                  ],
+         "Resource": "*"
+       }
+     ]
    }
    ```
     * Don't forget to click on the **Allow**
