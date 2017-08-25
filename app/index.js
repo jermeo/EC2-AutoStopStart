@@ -66,7 +66,7 @@ exports.handler = (event, context, callback) => {
                 startList.push(instance);
 
               }
-              else if (stopCron && awsUtils.isRunning(instance) && utils.isTimeToAction(stopCron, now, margin * 60)) {
+              else if (stopCron && awsUtils.isRunning(instance) && utils.isTimeToAction(stopCron, now, -margin * 60)) {
 
                 utils.log(`STOP needed: ${awsUtils.getRegionFromDNS(instance)}\\${awsUtils.getTagValue(instance, keyName)} - ${instance.InstanceId} - (${stopCron})`);
 

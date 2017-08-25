@@ -53,14 +53,14 @@ describe('Utils', function() {
 
     it('16h29: stop time: should return true', function() {
       const cron = "0 0 16 * * *";
-      const now = new Date(2017, 6, 30, 16, 29, 0);
+      const now = new Date(2017, 6, 30, 16, 5, 0);
       assert.equal(utils.isTimeToAction(cron, now, -30 * 60), true);
     });
 
     it('16h30: stop time: should return true', function() {
-      const cron = "0 0 16 * * *";
-      const now = new Date(2017, 6, 30, 16, 30, 0);
-      assert.equal(utils.isTimeToAction(cron, now, -30 * 60), true);
+      const cron = "0 15 10 * * *";
+      const now = new Date(2017, 6, 30, 10, 19, 0);
+      assert.equal(utils.isTimeToAction(cron, now, -15 * 60), true);
     });
 
     it('16h31 stop time should return false', function() {
